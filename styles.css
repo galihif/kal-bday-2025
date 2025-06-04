@@ -1,0 +1,702 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffd1dc 0%, #ffb6c1 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Love Pattern Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff758f' fill-opacity='0.15'%3E%3Cpath d='M75 50c-6-6-15.5-6-21.5 0-6 6-6 15.5 0 21.5l21.5 21.5 21.5-21.5c6-6 6-15.5 0-21.5-6-6-15.5-6-21.5 0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 1;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Floating Hearts Animation */
+.floating-hearts {
+    display: none;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 77, 109, 0.1);
+    transform: rotate(45deg);
+    animation: float-heart 15s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 77, 109, 0.1);
+    border-radius: 50%;
+}
+
+.heart::before {
+    left: -10px;
+}
+
+.heart::after {
+    top: -10px;
+}
+
+.heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+.heart:nth-child(2) { left: 30%; animation-delay: 3s; }
+.heart:nth-child(3) { left: 50%; animation-delay: 6s; }
+.heart:nth-child(4) { left: 70%; animation-delay: 9s; }
+.heart:nth-child(5) { left: 90%; animation-delay: 12s; }
+
+@keyframes float-heart {
+    0% {
+        transform: rotate(45deg) translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: rotate(45deg) translateY(-100px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Ensure content stays above decorative elements */
+.container, .butterfly, .countdown-section, .letter-section, .voucher, #gift-dialog {
+    position: relative;
+    z-index: 2;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+    width: 90%;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    margin-bottom: 2rem;
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(255, 77, 109, 0.1);
+    min-width: 100px;
+    border: 2px solid #ffb6c1;
+}
+
+.countdown-item span {
+    display: block;
+}
+
+.countdown-item span:first-child {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff4d6d;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.countdown-item .label {
+    color: #ff758f;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+#open-letter {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 77, 109, 0.2);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+}
+
+#open-letter:hover {
+    transform: scale(1.05);
+    background: #ff758f;
+    box-shadow: 0 6px 12px rgba(255, 77, 109, 0.3);
+}
+
+.letter {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px rgba(255, 77, 109, 0.15);
+    text-align: left;
+    line-height: 1.8;
+    border: 2px solid #ffb6c1;
+}
+
+.letter h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+}
+
+.letter p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.signature {
+    text-align: right;
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .countdown-container {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .countdown-item {
+        min-width: 80px;
+        padding: 1rem;
+    }
+
+    .countdown-item span:first-child {
+        font-size: 2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Butterfly Animation */
+.butterfly {
+    position: fixed;
+    font-size: 2rem;
+    z-index: 1000;
+    transform-origin: center;
+    filter: drop-shadow(0 0 5px rgba(255, 77, 109, 0.3));
+    opacity: 0;
+    pointer-events: none;
+}
+
+.butterfly1 {
+    animation: flyUp 15s linear infinite;
+    left: 20%;
+}
+
+.butterfly2 {
+    animation: flyUp 18s linear infinite;
+    animation-delay: 3s;
+    left: 40%;
+}
+
+.butterfly3 {
+    animation: flyUp 20s linear infinite;
+    animation-delay: 6s;
+    left: 60%;
+}
+
+.butterfly4 {
+    animation: flyUp 17s linear infinite;
+    animation-delay: 9s;
+    left: 80%;
+}
+
+.butterfly5 {
+    animation: flyUp 19s linear infinite;
+    animation-delay: 12s;
+    left: 30%;
+}
+
+@keyframes flyUp {
+    0% {
+        transform: translateY(calc(100vh + 50px)) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Gift Button Styles */
+.gift-button {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 77, 109, 0.2);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.gift-button:hover {
+    transform: scale(1.05);
+    background: #ff758f;
+    box-shadow: 0 6px 12px rgba(255, 77, 109, 0.3);
+}
+
+/* Voucher Styles */
+.voucher {
+    background: linear-gradient(135deg, #fff 0%, #fff5f7 100%);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(255, 77, 109, 0.15),
+                0 0 0 1px rgba(255, 77, 109, 0.1);
+    max-width: 500px;
+    margin: 2rem auto;
+    border: 2px solid #ffb6c1;
+    position: relative;
+    overflow: hidden;
+    transform: rotate(-1deg);
+    transition: transform 0.3s ease;
+}
+
+.voucher:hover {
+    transform: rotate(0deg);
+}
+
+.voucher::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, #ff4d6d, #ff758f);
+}
+
+.voucher::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffb6c1' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.voucher-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed #ffb6c1;
+}
+
+.voucher-header h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.1);
+}
+
+.voucher-decoration {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.voucher-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.voucher-title {
+    font-size: 1.8rem;
+    color: #ff4d6d;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.restaurant-name {
+    font-size: 2.2rem;
+    font-family: 'Dancing Script', cursive;
+    color: #ff758f;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(255, 77, 109, 0.1);
+}
+
+.voucher-details {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.voucher-info {
+    background: #fff5f7;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    border: 1px solid #ffb6c1;
+    box-shadow: inset 0 0 10px rgba(255, 77, 109, 0.1);
+}
+
+.voucher-info p {
+    margin: 0.8rem 0;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.voucher-info strong {
+    color: #ff4d6d;
+}
+
+.voucher-note {
+    font-style: italic;
+    color: #ff758f;
+    margin: 1.5rem 0;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-left: 3px solid #ffb6c1;
+    background: rgba(255, 182, 193, 0.1);
+    border-radius: 0 10px 10px 0;
+}
+
+.voucher-footer {
+    border-top: 2px dashed #ffb6c1;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    position: relative;
+}
+
+.voucher-footer::before {
+    content: '✂';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 0 10px;
+    color: #ff4d6d;
+    font-size: 1.2rem;
+}
+
+.voucher-code {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    color: #ff4d6d;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    background: #fff5f7;
+    border-radius: 5px;
+    display: inline-block;
+    border: 1px dashed #ffb6c1;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .countdown-container {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .countdown-item {
+        min-width: 70px;
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .countdown-item span:first-child {
+        font-size: 1.8rem;
+    }
+
+    .countdown-item .label {
+        font-size: 0.8rem;
+    }
+
+    #open-letter, .gift-button {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .letter {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .letter h2 {
+        font-size: 1.8rem;
+    }
+
+    .letter p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .signature {
+        font-size: 1.5rem;
+    }
+
+    .voucher {
+        padding: 1.5rem;
+        margin: 1rem;
+        transform: rotate(0deg);
+    }
+
+    .voucher-header h2 {
+        font-size: 2.2rem;
+    }
+
+    .voucher-title {
+        font-size: 1.5rem;
+    }
+
+    .restaurant-name {
+        font-size: 1.8rem;
+    }
+
+    .voucher-info {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .voucher-info p {
+        font-size: 1rem;
+        margin: 0.6rem 0;
+    }
+
+    .voucher-note {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+
+    .voucher-code {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .countdown-container {
+        gap: 0.5rem;
+    }
+
+    .countdown-item {
+        min-width: 60px;
+        padding: 0.8rem;
+        margin: 0.3rem;
+    }
+
+    .countdown-item span:first-child {
+        font-size: 1.5rem;
+    }
+
+    .countdown-item .label {
+        font-size: 0.7rem;
+    }
+
+    .letter {
+        padding: 1.2rem;
+    }
+
+    .letter h2 {
+        font-size: 1.6rem;
+    }
+
+    .voucher {
+        padding: 1.2rem;
+    }
+
+    .voucher-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .voucher-title {
+        font-size: 1.3rem;
+    }
+
+    .restaurant-name {
+        font-size: 1.6rem;
+    }
+
+    .voucher-info {
+        padding: 1.2rem;
+    }
+
+    .voucher-info p {
+        font-size: 0.9rem;
+    }
+
+    .voucher-note {
+        font-size: 0.9rem;
+    }
+
+    .voucher-code {
+        font-size: 0.9rem;
+    }
+}
+
+/* Adjust butterfly animation for mobile */
+@media (max-width: 768px) {
+    .butterfly {
+        font-size: 1.5rem;
+    }
+
+    .butterfly1 { left: 10%; }
+    .butterfly2 { left: 30%; }
+    .butterfly3 { left: 50%; }
+    .butterfly4 { left: 70%; }
+    .butterfly5 { left: 20%; }
+}
+
+@media (max-width: 480px) {
+    .butterfly {
+        font-size: 1.2rem;
+    }
+
+    .butterfly1 { left: 5%; }
+    .butterfly2 { left: 25%; }
+    .butterfly3 { left: 45%; }
+    .butterfly4 { left: 65%; }
+    .butterfly5 { left: 15%; }
+}
+
+/* Sticker Images */
+.sticker {
+    position: fixed;
+    z-index: 1;
+    width: 180px;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    animation: sticker-float 4s ease-in-out infinite;
+}
+
+/* Top row: 3 stickers, positioned above content */
+.sticker1 { top: 20px; left: 15%; animation-delay: 0s; }
+.sticker2 { top: 20px; left: 50%; transform: translateX(-50%); animation-delay: 1s; }
+.sticker3 { top: 20px; right: 15%; animation-delay: 2s; }
+
+/* Bottom row: 3 stickers, positioned below content */
+.sticker4 { bottom: 20px; left: 15%; animation-delay: 0.5s; }
+.sticker5 { bottom: 20px; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
+.sticker6 { bottom: 20px; right: 15%; animation-delay: 2.5s; }
+
+@keyframes sticker-float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    20% { transform: translateY(-8px) scale(1.03) rotate(-2deg); }
+    50% { transform: translateY(8px) scale(0.98) rotate(2deg); }
+    80% { transform: translateY(-8px) scale(1.02) rotate(-1deg); }
+}
+
+@media (max-width: 768px) {
+    .sticker {
+        width: 120px;
+    }
+    .sticker1 { top: 10px; left: 10%; }
+    .sticker2 { top: 10px; left: 50%; transform: translateX(-50%); }
+    .sticker3 { top: 10px; right: 10%; }
+    .sticker4 { bottom: 10px; left: 10%; }
+    .sticker5 { bottom: 10px; left: 50%; transform: translateX(-50%); }
+    .sticker6 { bottom: 10px; right: 10%; }
+}
+
+/* Remove confetti styles */
+.confetti {
+    display: none;
+}
+
+.confetti-piece {
+    display: none;
+}
+
+@keyframes confetti-fall {
+    0% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* Remove fireworks styles */
+.fireworks {
+    display: none;
+} 
