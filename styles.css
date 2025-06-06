@@ -680,6 +680,7 @@ h1 {
 .sticker.visible {
     opacity: 1;
     transform: scale(1);
+    animation: float-sticker 3s ease-in-out infinite;
 }
 
 .sticker1 { top: 20px; left: 15%; animation-delay: 0s; }
@@ -688,6 +689,18 @@ h1 {
 .sticker4 { bottom: 20px; left: 15%; animation-delay: 0.6s; }
 .sticker5 { bottom: 20px; left: 50%; transform: translateX(-50%); animation-delay: 0.8s; }
 .sticker6 { bottom: 20px; right: 15%; animation-delay: 1s; }
+
+@keyframes float-sticker {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
 
 @keyframes sticker-appear {
     0% {
@@ -701,7 +714,7 @@ h1 {
 }
 
 .sticker.animate {
-    animation: sticker-appear 0.5s ease-out forwards;
+    animation: sticker-appear 0.5s ease-out forwards, float-sticker 3s ease-in-out infinite;
 }
 
 /* Remove confetti styles */
