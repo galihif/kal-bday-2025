@@ -352,9 +352,20 @@ h1 {
 }
 
 .voucher-decoration {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    animation: float 3s ease-in-out infinite;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.restaurant-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border: 3px solid #ffb6c1;
 }
 
 .voucher-content {
@@ -551,6 +562,11 @@ h1 {
         font-size: 1rem;
         padding: 0.4rem 0.8rem;
     }
+
+    .restaurant-image {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -615,6 +631,11 @@ h1 {
     .voucher-code {
         font-size: 0.9rem;
     }
+
+    .restaurant-image {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 /* Adjust butterfly animation for mobile */
@@ -645,41 +666,42 @@ h1 {
 /* Sticker Images */
 .sticker {
     position: fixed;
-    z-index: 1;
     width: 180px;
     height: auto;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.5s ease-out;
+    z-index: 1;
     pointer-events: none;
     user-select: none;
-    animation: sticker-float 4s ease-in-out infinite;
+    object-fit: contain;
 }
 
-/* Top row: 3 stickers, positioned above content */
+.sticker.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .sticker1 { top: 20px; left: 15%; animation-delay: 0s; }
-.sticker2 { top: 20px; left: 50%; transform: translateX(-50%); animation-delay: 1s; }
-.sticker3 { top: 20px; right: 15%; animation-delay: 2s; }
+.sticker2 { top: 20px; left: 50%; transform: translateX(-50%); animation-delay: 0.2s; }
+.sticker3 { top: 20px; right: 15%; animation-delay: 0.4s; }
+.sticker4 { bottom: 20px; left: 15%; animation-delay: 0.6s; }
+.sticker5 { bottom: 20px; left: 50%; transform: translateX(-50%); animation-delay: 0.8s; }
+.sticker6 { bottom: 20px; right: 15%; animation-delay: 1s; }
 
-/* Bottom row: 3 stickers, positioned below content */
-.sticker4 { bottom: 20px; left: 15%; animation-delay: 0.5s; }
-.sticker5 { bottom: 20px; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
-.sticker6 { bottom: 20px; right: 15%; animation-delay: 2.5s; }
-
-@keyframes sticker-float {
-    0%, 100% { transform: translateY(0) scale(1); }
-    20% { transform: translateY(-8px) scale(1.03) rotate(-2deg); }
-    50% { transform: translateY(8px) scale(0.98) rotate(2deg); }
-    80% { transform: translateY(-8px) scale(1.02) rotate(-1deg); }
+@keyframes sticker-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(-10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
 }
 
-@media (max-width: 768px) {
-    .sticker {
-        width: 120px;
-    }
-    .sticker1 { top: 10px; left: 10%; }
-    .sticker2 { top: 10px; left: 50%; transform: translateX(-50%); }
-    .sticker3 { top: 10px; right: 10%; }
-    .sticker4 { bottom: 10px; left: 10%; }
-    .sticker5 { bottom: 10px; left: 50%; transform: translateX(-50%); }
-    .sticker6 { bottom: 10px; right: 10%; }
+.sticker.animate {
+    animation: sticker-appear 0.5s ease-out forwards;
 }
 
 /* Remove confetti styles */
@@ -699,4 +721,232 @@ h1 {
 /* Remove fireworks styles */
 .fireworks {
     display: none;
+}
+
+/* Watch Gift Styles */
+.watch-gift {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px rgba(255, 77, 109, 0.15);
+    text-align: center;
+    border: 2px solid #ffb6c1;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.watch-gift h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+}
+
+.watch-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.watch-silhouette {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watch-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(0.8) drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    animation: float 3s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.watch-face {
+    width: 120px;
+    height: 120px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.watch-strap {
+    width: 160px;
+    height: 40px;
+    background: #f0f0f0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+}
+
+.watch-message {
+    font-size: 1.2rem;
+    color: #666;
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .watch-gift {
+        padding: 1.5rem;
+    }
+
+    .watch-silhouette {
+        width: 150px;
+        height: 150px;
+    }
+
+    .watch-face {
+        width: 90px;
+        height: 90px;
+    }
+
+    .watch-strap {
+        width: 120px;
+        height: 30px;
+    }
+
+    .watch-message {
+        font-size: 1rem;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        filter: grayscale(100%) brightness(0.8) drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    }
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+        filter: grayscale(100%) brightness(0.8) drop-shadow(0 15px 20px rgba(0, 0, 0, 0.3));
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+        filter: grayscale(100%) brightness(0.8) drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    }
+}
+
+.whatsapp-button {
+    display: inline-block;
+    background: #25D366;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    border: 2px solid #25D366;
+}
+
+.whatsapp-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    background: #128C7E;
+    border-color: #128C7E;
+}
+
+.whatsapp-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(37, 211, 102, 0.3);
+}
+
+@media (max-width: 768px) {
+    .whatsapp-button {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(20px); }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+/* Ensure dialogs are hidden when they have the hidden class */
+.hidden {
+    display: none !important;
+    animation: none !important;
+}
+
+.close-button {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ff4d6d;
+    color: white;
+    border: 2px solid white;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 0;
+}
+
+.close-button:hover {
+    background: #ff758f;
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.close-button:active {
+    transform: scale(0.95);
+}
+
+/* Ensure dialogs have relative positioning for absolute close button */
+#letter-section,
+#gift-dialog,
+#watch-dialog {
+    position: relative;
+    margin: 12px; /* Add margin to prevent button from being cut off */
+}
+
+@media (max-width: 768px) {
+    .close-button {
+        top: 10px;
+        right: 10px;
+        width: 25px;
+        height: 25px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .close-button {
+        top: -10px;
+        right: -10px;
+        width: 24px;
+        height: 24px;
+        font-size: 18px;
+    }
 } 

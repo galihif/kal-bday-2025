@@ -1,5 +1,5 @@
 // Set the birthday date (June 7, 2025)
-const birthdayDate = new Date('2025-05-25T20:17:00');
+const birthdayDate = new Date('2025-06-07T00:00:00');
 
 // Get DOM elements
 const daysElement = document.getElementById('days');
@@ -38,13 +38,52 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown(); // Initial call
 
+// Function to hide all dialogs
+function hideAllDialogs() {
+    letterSection.classList.add('fade-out');
+    giftDialog.classList.add('fade-out');
+    watchDialog.classList.add('fade-out');
+    
+    setTimeout(() => {
+        letterSection.classList.add('hidden');
+        giftDialog.classList.add('hidden');
+        watchDialog.classList.add('hidden');
+        countdownSection.classList.remove('hidden');
+        
+        // Remove fade-out class after hiding
+        letterSection.classList.remove('fade-out');
+        giftDialog.classList.remove('fade-out');
+        watchDialog.classList.remove('fade-out');
+    }, 500);
+}
+
+// Function to animate stickers sequentially
+function animateStickers() {
+    const stickers = document.querySelectorAll('.sticker');
+    let delay = 0;
+    
+    stickers.forEach((sticker, index) => {
+        setTimeout(() => {
+            sticker.classList.add('animate');
+        }, delay);
+        delay += 200; // 200ms delay between each sticker
+    });
+    
+    // Return the total animation duration
+    return delay + 500; // Add 500ms for the last sticker's animation
+}
+
 // Handle letter reveal
 openLetterButton.addEventListener('click', () => {
-    countdownSection.classList.add('hidden');
-    letterSection.classList.remove('hidden');
+    // First animate stickers
+    const animationDuration = animateStickers();
     
-    // Add animation to the letter
-    letterSection.style.animation = 'fadeIn 1s ease-in';
+    // Then show the letter after stickers animation
+    setTimeout(() => {
+        countdownSection.classList.add('hidden');
+        letterSection.classList.remove('hidden');
+        letterSection.style.animation = 'fadeIn 1s ease-in';
+    }, animationDuration);
 });
 
 // Handle gift button click
@@ -54,9 +93,34 @@ const giftDialog = document.getElementById('gift-dialog');
 openGiftButton.addEventListener('click', () => {
     letterSection.classList.add('hidden');
     giftDialog.classList.remove('hidden');
-    
-    // Add animation to the voucher
     giftDialog.style.animation = 'fadeIn 1s ease-in';
+});
+
+// Handle watch gift reveal
+const openWatchButton = document.getElementById('open-watch');
+const watchDialog = document.getElementById('watch-dialog');
+
+openWatchButton.addEventListener('click', () => {
+    giftDialog.classList.add('hidden');
+    watchDialog.classList.remove('hidden');
+    watchDialog.style.animation = 'fadeIn 1s ease-in';
+});
+
+// Handle close buttons
+const closeButtons = document.querySelectorAll('.close-button');
+closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        hideAllDialogs();
+    });
+});
+
+// Handle WhatsApp button click
+const whatsappButton = document.querySelector('.whatsapp-button');
+whatsappButton.addEventListener('click', () => {
+    // Close all dialogs after a short delay
+    setTimeout(() => {
+        hideAllDialogs();
+    }, 500);
 });
 
 // Add animation keyframes
