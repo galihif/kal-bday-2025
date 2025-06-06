@@ -1,5 +1,5 @@
 // Set the birthday date (June 7, 2025)
-const birthdayDate = new Date('2025-06-06T00:00:00');
+const birthdayDate = new Date('2025-06-07T00:00:00');
 
 // Get DOM elements
 const daysElement = document.getElementById('days');
