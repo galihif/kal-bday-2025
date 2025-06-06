@@ -949,4 +949,32 @@ h1 {
         height: 24px;
         font-size: 18px;
     }
+}
+
+/* Audio Controls */
+#bgMusic {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+#bgMusic:hover {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    #bgMusic {
+        bottom: 10px;
+        right: 10px;
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    #bgMusic {
+        width: 150px;
+    }
 } 

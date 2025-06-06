@@ -10,6 +10,9 @@ const openLetterButton = document.getElementById('open-letter');
 const countdownSection = document.getElementById('countdown-section');
 const letterSection = document.getElementById('letter-section');
 
+// Background Music
+const bgMusic = document.getElementById('bgMusic');
+
 function updateCountdown() {
     const currentDate = new Date();
     const difference = birthdayDate - currentDate;
@@ -131,4 +134,16 @@ style.textContent = `
         to { opacity: 1; transform: translateY(0); }
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// Function to play background music
+function playBackgroundMusic() {
+    bgMusic.play().catch(error => {
+        console.log("Autoplay prevented:", error);
+    });
+}
+
+// Play music when user interacts with the page
+document.addEventListener('click', function() {
+    playBackgroundMusic();
+}, { once: true }); 
